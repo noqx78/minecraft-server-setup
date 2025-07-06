@@ -1,0 +1,42 @@
+## Build results
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+*.log
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+## Visual Studio Code workspace
+.vscode/
+
+## Visual Studio temporary files
+.vs/
+
+## Other IDE or system files
+*.DS_Store
+*.Thumbs.db
+
+## NuGet packages
+*.nupkg
+*.snupkg
+packages/
+*.nuspec
+
+## Dotnet-specific
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.deps.json
+
+## Others
+*.dbmdl
+*.bak
+*.Backup
+*.tmp
+*.temp
