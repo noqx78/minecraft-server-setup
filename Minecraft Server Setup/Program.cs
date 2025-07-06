@@ -104,7 +104,10 @@ internal class Program
                 if (parsed && selectedNumber >= 1 && selectedNumber <= spigotVersions.Length)
                 {
                     if (eula() == 'Y') {
+
                         download(spigotVersions[selectedNumber - 1].DownloadUrl, folderPath);
+                        string ramArgs = ram();
+                        createBat(folderPath, ramArgs);
                     }
                     else
                     {
@@ -156,22 +159,70 @@ static void download(string url, string folderPath)
         Directory.CreateDirectory(folderPath);
         Console.WriteLine($@"Created folder: {folderPath}");
         createEula(folderPath);
+
         return folderPath;
     }
 
 
     // ------------------------------------------------------
 
-    static string readRam()
+    static string ram()
     {
-        Console.Write("Enter the minimum amount of RAM for the server (in GB): ");
-        string input = Console.ReadLine();
-        Console.Write("Enter the maximum amount of RAM for the server (in GB): ");
-        string input2 = Console.ReadLine();
+        Console.Clear();
+        string inputMin;
+        string inputMax;
+        int minRam = 0; 
+        int maxRam = 0;  
+        bool validInput;
 
+        do
+        {
+            Console.Write("Enter the minimum amount of RAM for the server (in GB): ");
+            inputMin = Console.ReadLine();
+
+            Console.Write("Enter the maximum amount of RAM for the server (in GB): ");
+            inputMax = Console.ReadLine();
+
+            validInput = int.TryParse(inputMin, out minRam) &&
+                         int.TryParse(inputMax, out maxRam) &&
+                         minRam > 0 &&
+                         maxRam >= minRam;
+
+            if (!validInput)
+            {
+                Console.Clear();
+                Console.WriteLine("Invalid input.");
+                Console.WriteLine("Please enter whole numbers (like 2, 4, 8) and make sure min RAM ≤ max RAM.\n");
+            }
+
+        } while (!validInput);
+
+        Console.Clear();
+        Console.WriteLine($"RAM configuration: -Xms{minRam}G -Xmx{maxRam}G");
+        return $"-Xms{minRam}G -Xmx{maxRam}G";
     }
 
     // ------------------------------------------------------
+
+
+    static void createBat(string folderPath, string ramArgs)
+    {
+        string batPath = Path.Combine(folderPath, "start.bat");
+
+        string content = $@"@echo off
+:loop
+java {ramArgs} -jar server.jar nogui
+echo Server crashed or stopped. Restarting in 5 seconds...
+timeout /t 5
+goto loop";
+
+        File.WriteAllText(batPath, content);
+        Console.WriteLine($@"Created start.bat at: {batPath}");
+    }
+
+
+    // ------------------------------------------------------
+
 
     static Spigot[] spigotVersions = new Spigot[]
 {
