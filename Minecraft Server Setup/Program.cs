@@ -1,28 +1,45 @@
 ﻿using System.Runtime.InteropServices;
-
+using System.Net;
+using System;
+using System.IO;
 internal class Program
 {
 
+    private static string folderPath; 
     private static void Main(string[] args)
     {
-
-        Console.Title = "Minecraft Server Setup";
+        folderPath = createFolder();  
         loader();
     }
 
     // ------------------------------------------------------
     static char eula()
     {
+        Console.Clear();
         Console.WriteLine("By running this server, you agree to the EULA.");
         Console.WriteLine("You can find the EULA at https://www.minecraft.net/en-us/eula");
+        Console.Write("Y = Yes | N No: ");
+
         char inputChar;
         do
         {
-            Console.Write("Y = Yes | N No: ");
             inputChar = char.ToUpper(Console.ReadKey(true).KeyChar);  
         } while (inputChar != 'Y' && inputChar != 'N');
 
+        if (inputChar == 'Y')
+        {
+            Console.Clear();
+            Console.WriteLine("downloading server.jar");
+        }
+
         return inputChar;
+    }
+
+    static void createEula(string folderPath)
+    {
+        string eulaPath = Path.Combine(folderPath, "eula.txt");
+        File.WriteAllText(eulaPath, "eula=true");
+        Console.WriteLine($@"Created eula.txt with 'eula=true' at: {eulaPath}");
     }
 
     // ------------------------------------------------------
@@ -87,8 +104,9 @@ internal class Program
                 if (parsed && selectedNumber >= 1 && selectedNumber <= spigotVersions.Length)
                 {
                     if (eula() == 'Y') {
-                        // logic to download
-                    } else
+                        download(spigotVersions[selectedNumber - 1].DownloadUrl, folderPath);
+                    }
+                    else
                     {
                         Environment.Exit(0);
                     }
@@ -108,8 +126,48 @@ internal class Program
 
     // ------------------------------------------------------
 
-    static void download(string url)
+static void download(string url, string folderPath)
+{
+    string filePath = Path.Combine(folderPath, "server.jar");
+
+    using (WebClient client = new WebClient())
     {
+        client.DownloadFile(url, filePath);
+    }
+
+    Console.WriteLine($@"download server.jar done / {filePath}");
+}
+
+    // ------------------------------------------------------
+
+    static string createFolder()
+    {
+        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        string baseFolderName = "server";
+        string folderPath = Path.Combine(desktopPath, baseFolderName);
+        int counter = 1;
+
+        while (Directory.Exists(folderPath))
+        {
+            folderPath = Path.Combine(desktopPath, $"{baseFolderName}_{counter}");
+            counter++;
+        }
+
+        Directory.CreateDirectory(folderPath);
+        Console.WriteLine($@"Created folder: {folderPath}");
+        createEula(folderPath);
+        return folderPath;
+    }
+
+
+    // ------------------------------------------------------
+
+    static string readRam()
+    {
+        Console.Write("Enter the minimum amount of RAM for the server (in GB): ");
+        string input = Console.ReadLine();
+        Console.Write("Enter the maximum amount of RAM for the server (in GB): ");
+        string input2 = Console.ReadLine();
 
     }
 
@@ -117,7 +175,7 @@ internal class Program
 
     static Spigot[] spigotVersions = new Spigot[]
 {
-    new Spigot("1.21.5", "https://getbukkit.org/get/cNW08KHVlCEwof2IkXbxXIKeDPbfgMBU")
+    new Spigot("1.21.5", "https://cdn.getbukkit.org/spigot/spigot-1.21.5.jar")
 };
 
 }
