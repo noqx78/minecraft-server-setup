@@ -5,16 +5,28 @@ internal class Program
 
     private static void Main(string[] args)
     {
+
+        Console.Title = "Minecraft Server Setup";
         loader();
     }
 
-    static void eula()
+    // ------------------------------------------------------
+    static char eula()
     {
         Console.WriteLine("By running this server, you agree to the EULA.");
         Console.WriteLine("You can find the EULA at https://www.minecraft.net/en-us/eula");
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey();
+        char inputChar;
+        do
+        {
+            Console.Write("Y = Yes | N No: ");
+            inputChar = char.ToUpper(Console.ReadKey(true).KeyChar);  
+        } while (inputChar != 'Y' && inputChar != 'N');
+
+        return inputChar;
     }
+
+    // ------------------------------------------------------
+
 
     static void loader()
     {
@@ -42,7 +54,8 @@ internal class Program
 
         if (parsed && selectedNumber >= 1 && selectedNumber <= loaderVar.Length)
         {
-            Console.WriteLine($"\n\ndebug: {loaderVar[selectedNumber - 1].name}");
+           // Console.WriteLine($"\n\ndebug: {loaderVar[selectedNumber - 1].name}");
+            selectVersion(loaderVar[selectedNumber - 1].name);
         }
         else
         {
@@ -51,6 +64,61 @@ internal class Program
         }
 
     }
+
+    // ------------------------------------------------------
+
+    static void selectVersion(string loaderName)
+    {
+        Console.Clear();
+        int i = 1;
+        switch (loaderName)
+        {
+            case "Spigot":
+                i = 1;
+                foreach (var version in spigotVersions)
+                {
+                    Console.WriteLine($"{i} - {version.Name}");
+                    i++;
+                }
+
+                Console.Write("\nPlease select a version: ");
+                string input = Console.ReadLine();
+                bool parsed = int.TryParse(input, out int selectedNumber);
+                if (parsed && selectedNumber >= 1 && selectedNumber <= spigotVersions.Length)
+                {
+                    if (eula() == 'Y') {
+                        // logic to download
+                    } else
+                    {
+                        Environment.Exit(0);
+                    }
+                }
+                else
+                {
+                    Console.Clear();
+                    selectVersion(loaderName);
+                }
+                break;
+
+            default:
+                Console.WriteLine("Unknown loader");
+                break;
+        }
+    }
+
+    // ------------------------------------------------------
+
+    static void download(string url)
+    {
+
+    }
+
+    // ------------------------------------------------------
+
+    static Spigot[] spigotVersions = new Spigot[]
+{
+    new Spigot("1.21.5", "https://getbukkit.org/get/cNW08KHVlCEwof2IkXbxXIKeDPbfgMBU")
+};
 
 }
 
