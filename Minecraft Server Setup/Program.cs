@@ -35,12 +35,19 @@ internal class Program
         }
 
         Console.Write("\nPlease select a loader: ");
-        ConsoleKeyInfo keyInput = Console.ReadKey();
+        string input = Console.ReadLine();
 
-        int selectedNumber = keyInput.KeyChar - '0';
-        if (keyInput.KeyChar != listNumber || keyInput.KeyChar > loaderVar.Length)
+
+        bool parsed = int.TryParse(input, out int selectedNumber);
+
+        if (parsed && selectedNumber >= 1 && selectedNumber <= loaderVar.Length)
         {
             Console.WriteLine($"\n\ndebug: {loaderVar[selectedNumber - 1].name}");
+        }
+        else
+        {
+            Console.Clear();
+            loader();
         }
 
     }
