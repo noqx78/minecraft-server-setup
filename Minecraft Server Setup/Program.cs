@@ -57,7 +57,7 @@ internal class Program
             new("Fabric"),
         };
 
-        foreach (var loader in loaderVar )
+        foreach (var loader in loaderVar)
         {
             Console.WriteLine($"({listNumber}) {loader.name}");
             listNumber++;
@@ -94,7 +94,7 @@ internal class Program
                 i = 1;
                 foreach (var version in spigotVersions)
                 {
-                    Console.WriteLine($"{i} - {version.Name}");
+                    Console.WriteLine($"{i:00} - {version.Name}");
                     i++;
                 }
 
@@ -225,9 +225,53 @@ goto loop";
 
 
     static Spigot[] spigotVersions = new Spigot[]
-{
-    new Spigot("1.21.5", "https://cdn.getbukkit.org/spigot/spigot-1.21.5.jar")
-};
+    {
+    new Spigot("1.21.5", "https://cdn.getbukkit.org/spigot/spigot-1.21.5.jar"),
+    new Spigot("1.21.4", "https://cdn.getbukkit.org/spigot/spigot-1.21.4.jar"),
+    new Spigot("1.21.3", "https://cdn.getbukkit.org/spigot/spigot-1.21.3.jar"),
+    new Spigot("1.21.1", "https://cdn.getbukkit.org/spigot/spigot-1.21.1.jar"),
+    new Spigot("1.20.6", "https://cdn.getbukkit.org/spigot/spigot-1.20.6.jar"),
+    new Spigot("1.20.4", "https://cdn.getbukkit.org/spigot/spigot-1.20.4.jar"),
+    new Spigot("1.20.2", "https://cdn.getbukkit.org/spigot/spigot-1.20.2.jar"),
+    new Spigot("1.20.1", "https://cdn.getbukkit.org/spigot/spigot-1.20.1.jar"),
+    new Spigot("1.19.4", "https://cdn.getbukkit.org/spigot/spigot-1.19.4.jar"),
+    new Spigot("1.19.3", "https://cdn.getbukkit.org/spigot/spigot-1.19.3.jar"),
+    new Spigot("1.19.2", "https://cdn.getbukkit.org/spigot/spigot-1.19.2.jar"),
+    new Spigot("1.19.1", "https://cdn.getbukkit.org/spigot/spigot-1.19.1.jar"),
+    new Spigot("1.19",   "https://cdn.getbukkit.org/spigot/spigot-1.19.jar"),
+    new Spigot("1.18.2", "https://cdn.getbukkit.org/spigot/spigot-1.18.2.jar"),
+    new Spigot("1.18.1", "https://cdn.getbukkit.org/spigot/spigot-1.18.1.jar"),
+    new Spigot("1.18",   "https://cdn.getbukkit.org/spigot/spigot-1.18.jar"),
+    new Spigot("1.16.5", "https://cdn.getbukkit.org/spigot/spigot-1.16.5.jar"),
+    new Spigot("1.16.4", "https://cdn.getbukkit.org/spigot/spigot-1.16.4.jar"),
+    new Spigot("1.16.3", "https://cdn.getbukkit.org/spigot/spigot-1.16.3.jar"),
+    new Spigot("1.16.2", "https://cdn.getbukkit.org/spigot/spigot-1.16.2.jar"),
+    new Spigot("1.16.1", "https://cdn.getbukkit.org/spigot/spigot-1.16.1.jar"),
+    new Spigot("1.15.2", "https://cdn.getbukkit.org/spigot/spigot-1.15.2.jar"),
+    new Spigot("1.15.1", "https://cdn.getbukkit.org/spigot/spigot-1.15.1.jar"),
+    new Spigot("1.15",   "https://cdn.getbukkit.org/spigot/spigot-1.15.jar"),
+    new Spigot("1.14.4", "https://cdn.getbukkit.org/spigot/spigot-1.14.4.jar"),
+    new Spigot("1.14.3", "https://cdn.getbukkit.org/spigot/spigot-1.14.3.jar"),
+    new Spigot("1.14.2", "https://cdn.getbukkit.org/spigot/spigot-1.14.2.jar"),
+    new Spigot("1.14.1", "https://cdn.getbukkit.org/spigot/spigot-1.14.1.jar"),
+    new Spigot("1.14",   "https://cdn.getbukkit.org/spigot/spigot-1.14.jar"),
+    new Spigot("1.13.2", "https://cdn.getbukkit.org/spigot/spigot-1.13.2.jar"),
+    new Spigot("1.13.1", "https://cdn.getbukkit.org/spigot/spigot-1.13.1.jar"),
+    new Spigot("1.13",   "https://cdn.getbukkit.org/spigot/spigot-1.13.jar"),
+    new Spigot("1.12.2", "https://cdn.getbukkit.org/spigot/spigot-1.12.2.jar"),
+    new Spigot("1.12.1", "https://cdn.getbukkit.org/spigot/spigot-1.12.1.jar"),
+    new Spigot("1.12",   "https://cdn.getbukkit.org/spigot/spigot-1.12.jar"),
+    new Spigot("1.11.2", "https://cdn.getbukkit.org/spigot/spigot-1.11.2.jar"),
+    new Spigot("1.11",   "https://cdn.getbukkit.org/spigot/spigot-1.11.jar"),
+    new Spigot("1.10.2", "https://cdn.getbukkit.org/spigot/spigot-1.10.2.jar"),
+    new Spigot("1.9.4",  "https://cdn.getbukkit.org/spigot/spigot-1.9.4.jar"),
+    new Spigot("1.9.2",  "https://cdn.getbukkit.org/spigot/spigot-1.9.2.jar"),
+    new Spigot("1.9",    "https://cdn.getbukkit.org/spigot/spigot-1.9.jar"),
+    new Spigot("1.8.8",  "https://cdn.getbukkit.org/spigot/spigot-1.8.8.jar"),
+    new Spigot("1.8.3",  "https://cdn.getbukkit.org/spigot/spigot-1.8.3.jar"),
+    new Spigot("1.8",    "https://cdn.getbukkit.org/spigot/spigot-1.8.jar"),
+    };
+
 
 }
 
