@@ -5,10 +5,10 @@ using System.IO;
 internal class Program
 {
 
-    private static string folderPath; 
+    private static string folderPath;
     private static void Main(string[] args)
     {
-        folderPath = createFolder();  
+        folderPath = createFolder();
         loader();
     }
 
@@ -23,7 +23,7 @@ internal class Program
         char inputChar;
         do
         {
-            inputChar = char.ToUpper(Console.ReadKey(true).KeyChar);  
+            inputChar = char.ToUpper(Console.ReadKey(true).KeyChar);
         } while (inputChar != 'Y' && inputChar != 'N');
 
         if (inputChar == 'Y')
@@ -71,7 +71,7 @@ internal class Program
 
         if (parsed && selectedNumber >= 1 && selectedNumber <= loaderVar.Length)
         {
-           // Console.WriteLine($"\n\ndebug: {loaderVar[selectedNumber - 1].name}");
+            // Console.WriteLine($"\n\ndebug: {loaderVar[selectedNumber - 1].name}");
             selectVersion(loaderVar[selectedNumber - 1].name);
         }
         else
@@ -120,6 +120,38 @@ internal class Program
                     selectVersion(loaderName);
                 }
                 break;
+            case "Vanilla":
+                i = 1;
+                foreach (var version in vanillaVersions)
+                {
+                    Console.WriteLine($"{i:00} - {version.Name}");
+                    i++;
+                }
+
+                Console.Write("\nPlease select a version: ");
+                input = Console.ReadLine();
+                parsed = int.TryParse(input, out selectedNumber);
+                if (parsed && selectedNumber >= 1 && selectedNumber <= vanillaVersions.Length)
+                {
+                    if (eula() == 'Y')
+                    {
+                        download(vanillaVersions[selectedNumber - 1].DownloadUrl, folderPath);
+                        string ramArgs = ram();
+                        createBat(folderPath, ramArgs);
+                    }
+                    else
+                    {
+                        Environment.Exit(0);
+                    }
+                }
+                else
+                {
+                    Console.Clear();
+                    selectVersion(loaderName);
+                }
+                break;
+
+
 
             default:
                 Console.WriteLine("Unknown loader");
@@ -129,17 +161,17 @@ internal class Program
 
     // ------------------------------------------------------
 
-static void download(string url, string folderPath)
-{
-    string filePath = Path.Combine(folderPath, "server.jar");
-
-    using (WebClient client = new WebClient())
+    static void download(string url, string folderPath)
     {
-        client.DownloadFile(url, filePath);
-    }
+        string filePath = Path.Combine(folderPath, "server.jar");
 
-    Console.WriteLine($@"download server.jar done / {filePath}");
-}
+        using (WebClient client = new WebClient())
+        {
+            client.DownloadFile(url, filePath);
+        }
+
+        Console.WriteLine($@"download server.jar done / {filePath}");
+    }
 
     // ------------------------------------------------------
 
@@ -171,8 +203,8 @@ static void download(string url, string folderPath)
         Console.Clear();
         string inputMin;
         string inputMax;
-        int minRam = 0; 
-        int maxRam = 0;  
+        int minRam = 0;
+        int maxRam = 0;
         bool validInput;
 
         do
@@ -273,6 +305,16 @@ goto loop";
     };
 
 
+    static Vanilla[] vanillaVersions = new Vanilla[]
+    {
+    new Vanilla("1.21.7", "https://piston-data.mojang.com/v1/objects/05e4b48fbc01f0385adb74bcff9751d34552486c/server.jar"),
+    new Vanilla("1.21.4", "https://piston-data.mojang.com/v1/objects/4707d00eb834b446575d89a61a11b5d548d8c001/server.jar"),
+    new Vanilla("1.21.1", "https://piston-data.mojang.com/v1/objects/59353fb40c36d304f2035d51e7d6e6baa98dc05c/server.jar"),
+    new Vanilla("1.19.4", "https://piston-data.mojang.com/v1/objects/8f3112a1049751cc472ec13e397eade5336ca7ae/server.jar"),
+    new Vanilla("1.16.5", "https://piston-data.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec1673ced/server.jar"),
+    new Vanilla("1.12.2", "https://piston-data.mojang.com/v1/objects/886945bfb2b978778c3a0288fd7fab09d315b25f/server.jar"),
+    new Vanilla("1.8.9", "https://piston-data.mojang.com/v1/objects/b58b2ceb36e01bcd8dbf49c8fb66c55a9f0676cd/server.jar"),
+    };
 }
 
 public record Vanilla(string Name, string DownloadUrl);
