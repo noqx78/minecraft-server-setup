@@ -17,7 +17,7 @@
 ---
 
 
-> [!Info]
+> [!Note]
 > Some Minecraft versions might not work perfectly because I haven't tested all of them — honestly, I ain’t wasting my time on that.  
 >  
 > However, if you run into any problems or a download link is broken, just let me know and I’ll fix it as soon as possible.  

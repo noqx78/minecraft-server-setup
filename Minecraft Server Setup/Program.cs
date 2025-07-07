@@ -8,7 +8,8 @@ internal class Program
     private static string folderPath;
     private static void Main(string[] args)
     {
-        folderPath = createFolder();
+        Console.Title = "Minecraft Server Setup";
+        //folderPath = createFolder();
         loader();
     }
 
@@ -54,7 +55,6 @@ internal class Program
             new("Vanilla"),
             new("Spigot"),
             new("Paper"),
-            new("Fabric"),
         };
 
         foreach (var loader in loaderVar)
@@ -104,7 +104,7 @@ internal class Program
                 if (parsed && selectedNumber >= 1 && selectedNumber <= spigotVersions.Length)
                 {
                     if (eula() == 'Y') {
-
+                        folderPath = createFolder();
                         download(spigotVersions[selectedNumber - 1].DownloadUrl, folderPath);
                         string ramArgs = ram();
                         createBat(folderPath, ramArgs);
@@ -136,6 +136,7 @@ internal class Program
                 {
                     if (eula() == 'Y')
                     {
+                        folderPath = createFolder();
                         download(vanillaVersions[selectedNumber - 1].DownloadUrl, folderPath);
                         string ramArgs = ram();
                         createBat(folderPath, ramArgs);
@@ -167,6 +168,7 @@ internal class Program
                 {
                     if (eula() == 'Y')
                     {
+                        folderPath = createFolder();
                         download(paperVersions[selectedNumber - 1].DownloadUrl, folderPath);
                         string ramArgs = ram();
                         createBat(folderPath, ramArgs);
@@ -182,9 +184,6 @@ internal class Program
                     selectVersion(loaderName);
                 }
                 break;
-
-
-
 
             default:
                 Console.WriteLine("Unknown loader");
@@ -366,6 +365,5 @@ goto loop";
 public record Vanilla(string Name, string DownloadUrl);
 public record Spigot(string Name, string DownloadUrl);
 public record Paper(string Name, string DownloadUrl);
-public record Fabric(string Name, string DownloadUrl);
 
 public record loader(string name);
