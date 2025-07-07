@@ -1,3 +1,8 @@
+>[!IMPORTANT]
+>🛠️ This tool requires .NET 8.0 Runtime to run.
+>
+>If you don’t have it installed yet, you can download it here: https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+
 > [!Warning]
 > If a Minecraft version doesn't work correctly, or you're experiencing **any issues**, please **open an issue** here:
 >
@@ -23,3 +28,4 @@
 > However, if you run into any problems or a download link is broken, just let me know and I’ll fix it as soon as possible.  
 >  
 > Thanks for understanding!
+
