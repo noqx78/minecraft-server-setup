@@ -1,12 +1,25 @@
 > [!Warning]
-If a Minecraft version doesn't work correctly, or you're experiencing **any issues**, please **open an issue** here:
+> If a Minecraft version doesn't work correctly, or you're experiencing **any issues**, please **open an issue** here:
 >
->➡️ [https://github.com/noqx78/minecraft-server-setup/issues](https://github.com/noqx78/minecraft-server-setup/issues)
+> ➡️ [https://github.com/noqx78/minecraft-server-setup/issues](https://github.com/noqx78/minecraft-server-setup/issues)
 >
->This helps us fix problems faster and improve compatibility with different versions.
+> This helps us fix problems faster and improve compatibility with different versions.
 >
->### 📝 When reporting, please include:
->- Minecraft version  
->- Loader type (e.g., **Paper**, **Fabric**, etc.)  
->- What exactly went wrong (e.g., error message, crash details)  
->- Steps to reproduce the issue  
+> If you want a version added, please also open an issue.
+>
+> ### 📝 When reporting, please include:
+> - Minecraft version  
+> - Loader type (e.g., **Paper**, **Fabric**, etc.)  
+> - What exactly went wrong (e.g., error message, crash details)  
+> - Steps to reproduce the issue  
+
+
+---
+
+
+> [!Info]
+> Some Minecraft versions might not work perfectly because I haven't tested all of them — honestly, I ain’t wasting my time on that.  
+>  
+> However, if you run into any problems or a download link is broken, just let me know and I’ll fix it as soon as possible.  
+>  
+> Thanks for understanding!

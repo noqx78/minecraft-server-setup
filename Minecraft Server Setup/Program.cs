@@ -120,6 +120,7 @@ internal class Program
                     selectVersion(loaderName);
                 }
                 break;
+
             case "Vanilla":
                 i = 1;
                 foreach (var version in vanillaVersions)
@@ -150,6 +151,38 @@ internal class Program
                     selectVersion(loaderName);
                 }
                 break;
+
+            case "Paper":
+                i = 1;
+                foreach (var version in paperVersions)
+                {
+                    Console.WriteLine($"{i:00} - {version.Name}");
+                    i++;
+                }
+
+                Console.Write("\nPlease select a version: ");
+                input = Console.ReadLine();
+                parsed = int.TryParse(input, out selectedNumber);
+                if (parsed && selectedNumber >= 1 && selectedNumber <= paperVersions.Length)
+                {
+                    if (eula() == 'Y')
+                    {
+                        download(paperVersions[selectedNumber - 1].DownloadUrl, folderPath);
+                        string ramArgs = ram();
+                        createBat(folderPath, ramArgs);
+                    }
+                    else
+                    {
+                        Environment.Exit(0);
+                    }
+                }
+                else
+                {
+                    Console.Clear();
+                    selectVersion(loaderName);
+                }
+                break;
+
 
 
 
@@ -315,6 +348,19 @@ goto loop";
     new Vanilla("1.12.2", "https://piston-data.mojang.com/v1/objects/886945bfb2b978778c3a0288fd7fab09d315b25f/server.jar"),
     new Vanilla("1.8.9", "https://piston-data.mojang.com/v1/objects/b58b2ceb36e01bcd8dbf49c8fb66c55a9f0676cd/server.jar"),
     };
+
+    static Paper[] paperVersions = new Paper[]
+    {
+    new Paper("1.21.7", "https://api.papermc.io/v2/projects/paper/versions/1.21.7/builds/17/downloads/paper-1.21.7-17.jar"),
+    new Paper("1.21.6", "https://api.papermc.io/v2/projects/paper/versions/1.21.6/builds/48/downloads/paper-1.21.6-48.jar"),
+    new Paper("1.21.4", "https://api.papermc.io/v2/projects/paper/versions/1.21.4/builds/232/downloads/paper-1.21.4-232.jar"),
+    new Paper("1.20.4", "https://api.papermc.io/v2/projects/paper/versions/1.20.4/builds/540/downloads/paper-1.20.4-540.jar"),
+    new Paper("1.19.4", "https://api.papermc.io/v2/projects/paper/versions/1.19.4/builds/550/downloads/paper-1.19.4-550.jar"),
+    new Paper("1.18.2", "https://api.papermc.io/v2/projects/paper/versions/1.18.2/builds/385/downloads/paper-1.18.2-385.jar"),
+    new Paper("1.16.5", "https://api.papermc.io/v2/projects/paper/versions/1.16.5/builds/794/downloads/paper-1.16.5-794.jar"),
+    new Paper("1.12.2", "https://api.papermc.io/v2/projects/paper/versions/1.12.2/builds/1620/downloads/paper-1.12.2-1620.jar"),
+    };
+
 }
 
 public record Vanilla(string Name, string DownloadUrl);
