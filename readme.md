@@ -1,3 +1,9 @@
+
+[![Download](https://img.shields.io/badge/Download-ZIP-blue?style=for-the-badge&logo=github)](https://github.com/noqx78/minecraft-server-setup/releases/download/v0.1/Minecraft.Server.Setup.zip)
+![Downloads](https://img.shields.io/github/downloads/noqx78/minecraft-server-setup/total?label=Downloads&style=flat-square)
+
+<a href="https://github.com/noqx78/minecraft-server-setup/releases/download/v0.1/Minecraft.Server.Setup.zip" style="background-color:#4CAF50;color:white;padding:10px 20px;text-decoration:none;border-radius:5px;">Download ZIP</a>
+
 >[!IMPORTANT]
 >🛠️ This tool requires .NET 8.0 Runtime to run.
 >
